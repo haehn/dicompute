@@ -95,7 +95,8 @@ class GC:
     '''
     t0 = time.time()
 
-    client = GC.connect(verbose=False)
+    client = GC.connect(verbose=True)
+    # return client
 
     if not outdir:
       outdir = tempfile.mkdtemp()
