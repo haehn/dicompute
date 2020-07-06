@@ -95,7 +95,7 @@ class GC:
     '''
     t0 = time.time()
 
-    client = GC.connect(verbose=True)
+    client = GC.connect(verbose=False)
     # return client
 
     if not outdir:
