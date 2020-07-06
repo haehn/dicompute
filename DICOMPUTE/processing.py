@@ -21,13 +21,13 @@ class Processing:
         stdout = os.popen(cmd).read()
 
     if verbose:
-      print('Conversion completed after ', time.time()-t0, 'seconds.')
+      print('NII Conversion completed after ', time.time()-t0, 'seconds.')
 
     return nii_path
 
 
   @staticmethod
-  def sift3d(nii_path, verbose=True, featExtract_executable='featExtract1.6/featExtract.ubu'):
+  def sift3d(nii_path, verbose=True, featExtract_executable='/home/d/Projects/dicompute/featExtract1.6/featExtract.ubu'):
     '''
     Calculate 3D Sift features for a nii file.
     '''
