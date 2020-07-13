@@ -13,6 +13,9 @@ class DeepLesion:
     imgfile = data.iloc[WHICH]['File_name']
     bbox = np.array([float(v) for v in data.iloc[WHICH]['Bounding_boxes'].split(',')])
     im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox)
+
+    print(box, scale)
+    plt.figure()
     plt.imshow(im_small)
 
 
@@ -29,6 +32,8 @@ class DeepLesion:
     imgfile = row.iloc[0]['File_name']
     bbox = np.array([float(v) for v in row.iloc[0]['Bounding_boxes'].split(',')])
     im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox)
+
+
     plt.imshow(im_small)
 
 
@@ -53,8 +58,20 @@ class DeepLesion:
                       num_slice,
                       do_windowing
                       )
+    print(bbox)
+    lw = 1
+    img[int(bbox[1]):int(bbox[3]),int(bbox[0]):int(bbox[0])+lw] = 255
+    img[int(bbox[1]):int(bbox[3]),int(bbox[2]):int(bbox[2])+lw] = 255
+
+    img[int(bbox[1]):int(bbox[1])+lw,int(bbox[0]):int(bbox[2])] = 255
+    img[int(bbox[3]):int(bbox[3])+lw,int(bbox[0]):int(bbox[2])] = 255
+
+
+    plt.figure()
+    plt.imshow(img)
 
     im_small, box, scale = load_ct_img.get_patch(img, bbox)
+
 
     return im_small, box, scale
 
