@@ -37,9 +37,9 @@ patients = sorted(D.GC.lsdir(bucket, 'dicom/'))
 selected_studies = []
 
 #
-# Download data (sequentiell) #TODO
+# Download data (sequential) #TODO
 #
-for p in patients[0:10]:
+for p in patients:
 
   studies = sorted(D.GC.lsdir(bucket, p))
 
