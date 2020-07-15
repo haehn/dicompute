@@ -6,11 +6,12 @@ class CVAE(tf.keras.Model):
   """From: https://www.tensorflow.org/tutorials/generative/cvae"""
 
   def __init__(self, latent_dim):
-    super(CVAE, self).__init__()
+    # super(CVAE, self).__init__()
+    super().__init__()
     self.latent_dim = latent_dim
     self.encoder = tf.keras.Sequential(
         [
-            tf.keras.layers.InputLayer(input_shape=(28, 28, 1)),
+            tf.keras.layers.InputLayer(input_shape=(120, 120, 1)),
             tf.keras.layers.Conv2D(
                 filters=32, kernel_size=3, strides=(2, 2), activation='relu'),
             tf.keras.layers.Conv2D(

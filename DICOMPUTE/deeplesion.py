@@ -33,12 +33,17 @@ class DeepLesion:
     bbox = np.array([float(v) for v in row.iloc[0]['Bounding_boxes'].split(',')])
     im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox)
 
-
     plt.imshow(im_small)
+
+  @staticmethod
+  def get_lesion_image(imgfile, bbox):
+    im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox, show=False)
+    return im_small
+
 
 
   @staticmethod
-  def get_lesion(filename, bbox, do_clip=False, num_slice=1, datadir='/mnt/data/deeplesion/Images_png/'):
+  def get_lesion(filename, bbox, do_clip=False, num_slice=1, datadir='/mnt/data/deeplesion/Images_png/', show=True):
 
     png = filename.split('_')[-1]
     folder = filename.replace('_'+png, '')
@@ -58,17 +63,18 @@ class DeepLesion:
                       num_slice,
                       do_windowing
                       )
-    print(bbox)
-    lw = 1
-    img[int(bbox[1]):int(bbox[3]),int(bbox[0]):int(bbox[0])+lw] = 255
-    img[int(bbox[1]):int(bbox[3]),int(bbox[2]):int(bbox[2])+lw] = 255
+    # print(bbox)
+    if show:
+      lw = 1
+      img[int(bbox[1]):int(bbox[3]),int(bbox[0]):int(bbox[0])+lw] = 255
+      img[int(bbox[1]):int(bbox[3]),int(bbox[2]):int(bbox[2])+lw] = 255
 
-    img[int(bbox[1]):int(bbox[1])+lw,int(bbox[0]):int(bbox[2])] = 255
-    img[int(bbox[3]):int(bbox[3])+lw,int(bbox[0]):int(bbox[2])] = 255
+      img[int(bbox[1]):int(bbox[1])+lw,int(bbox[0]):int(bbox[2])] = 255
+      img[int(bbox[3]):int(bbox[3])+lw,int(bbox[0]):int(bbox[2])] = 255
 
-
-    plt.figure()
-    plt.imshow(img)
+    if show:
+      plt.figure()
+      plt.imshow(img)
 
     im_small, box, scale = load_ct_img.get_patch(img, bbox)
 

@@ -313,4 +313,6 @@ def get_patch(im, box):
         box_new = np.maximum(0, box-np.hstack((center, center))+mg)
         patch_scale = 1.
 
+
+
     return patch.copy(), box_new, patch_scale
