@@ -14,5 +14,11 @@ sudo apt-get install git
 
 conda activate DCM
 conda install jupyter
+conda install -c conda-forge dicom2nifti
+conda install -c conda-forge dcm2niix
+pip install pydra
+conda install nibabel
+conda install -c conda-forge mahotas
+conda install keras-gpu
 
 gcloud compute ssh dicompute -- -N -p 22 -L 44321:localhost:44321
