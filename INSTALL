@@ -22,6 +22,10 @@ conda install -c conda-forge mahotas
 conda install keras-gpu
 conda install -c conda-forge google-auth 
 conda install -c conda-forge google-cloud-storage 
+conda install -c conda-forge easydict
 
 
+# note this is only for Google Cloud
 gcloud compute ssh dicompute -- -N -p 22 -L 44321:localhost:44321
+# for UMB machine:
+ssh -f XXX@YYY -L 44321:0.0.0.0:44321 -N
