@@ -20,5 +20,8 @@ pip install pydra
 conda install nibabel
 conda install -c conda-forge mahotas
 conda install keras-gpu
+conda install -c conda-forge google-auth 
+conda install -c conda-forge google-cloud-storage 
+
 
 gcloud compute ssh dicompute -- -N -p 22 -L 44321:localhost:44321
