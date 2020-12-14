@@ -6,13 +6,13 @@ import matplotlib.pyplot as plt
 class DeepLesion:
 
   @staticmethod
-  def show(WHICH):
+  def show(WHICH, datadir='/mnt/data/deeplesion/Images_png/'):
     '''
     '''
     data = pandas.read_csv('DL_info.csv')
     imgfile = data.iloc[WHICH]['File_name']
     bbox = np.array([float(v) for v in data.iloc[WHICH]['Bounding_boxes'].split(',')])
-    im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox)
+    im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox, datadir=datadir)
 
     print(box, scale)
     plt.figure()
@@ -20,7 +20,7 @@ class DeepLesion:
 
 
   @staticmethod
-  def showType(WHICH):
+  def showType(WHICH, datadir='/mnt/data/deeplesion/Images_png/', show=True):
     '''
     '''
     data = pandas.read_csv('DL_info.csv')
@@ -31,9 +31,12 @@ class DeepLesion:
     row = data.sample()
     imgfile = row.iloc[0]['File_name']
     bbox = np.array([float(v) for v in row.iloc[0]['Bounding_boxes'].split(',')])
-    im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox)
+    im_small, box, scale = DeepLesion.get_lesion(imgfile, bbox, datadir=datadir, show=show)
 
-    plt.imshow(im_small)
+    if show:
+      plt.imshow(im_small)
+    else:
+      return im_small, box, scale
 
   @staticmethod
   def get_lesion_image(imgfile, bbox):
