@@ -14,5 +14,21 @@ sudo apt-get install git
 
 conda activate DCM
 conda install jupyter
+conda install -c conda-forge dicom2nifti
+conda install -c conda-forge dcm2niix
+pip install pydra
+conda install nibabel
+conda install -c conda-forge mahotas
+conda install keras-gpu
+conda install -c conda-forge google-auth 
+conda install -c conda-forge google-cloud-storage 
+conda install -c conda-forge easydict
+conda install pandas
 
+# note this is only for Google Cloud
 gcloud compute ssh dicompute -- -N -p 22 -L 44321:localhost:44321
+# for UMB machine:
+# Tunnel to jupyter
+ssh -f XXX@YYY -L 44321:0.0.0.0:44321 -N
+# SSHFS tunnel
+sshfs XXX@YYY:/home/XXX/Projects/dicompute dicompute_remote
